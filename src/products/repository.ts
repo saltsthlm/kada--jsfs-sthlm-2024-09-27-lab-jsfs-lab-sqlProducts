@@ -17,7 +17,6 @@ export const createDatabase = async () => {
     connectionTimeoutMillis: 2000,  
     ssl: { rejectUnauthorized: false },  
   });
-  
   return await pool.connect();  
 };
 
