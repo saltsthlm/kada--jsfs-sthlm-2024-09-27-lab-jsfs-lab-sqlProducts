@@ -1,20 +1,20 @@
-import { Categories } from './types';
+import pg from 'pg'
+import { config } from '../config';
 
-const categories = () : Categories[] => [
-  {
-    id: 1,
-    name: 'Food',
-  },
-  {
-    id: 2,
-    name: 'Beverages',
-  },
-  {
-    id: 3,
-    name: 'Toys',
-  },
-];
+const { Pool } = pg;
+ 
 
-export default {
-  categories,
+export const createDatabase = async () => {
+  const pool = new Pool({
+    host: config.host,
+    database: config.database,
+    user: config.user,
+    password: config.password,
+    port: config.port,
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,  
+    ssl: { rejectUnauthorized: false },  
+  });
+  return await pool.connect();  
 };
