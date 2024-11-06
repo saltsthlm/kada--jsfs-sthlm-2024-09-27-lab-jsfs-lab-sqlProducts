@@ -13,6 +13,13 @@ export const createRouter = (service: ProductService) => {
     const product = await service.getById(req.params.id)
     res.status(200).json(product);
   });
+
+  router.post('/', async (req, res) => {
+    await service.createProduct(req.body);
+    res.status(201).json();
+  });
+
+
 /*   router.post("/", async (req, res) => {
     console.log(req.body)
     const { name, description, price, category_id } = req.body
