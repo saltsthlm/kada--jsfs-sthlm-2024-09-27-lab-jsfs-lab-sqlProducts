@@ -1,27 +1,27 @@
 import express from 'express';
-import { PoolClient } from 'pg';
+import { ProductService } from './service';
 
-export const createRouter = (client: PoolClient) => {
+export const createRouter = (service: ProductService) => {
   const router = express.Router();
 
   router.get('/', async (_req, res) => {
-    const productsList = (await client.query("SELECT * from products"))
-    res.status(200).json(productsList.rows);   
+    const products = await service.getAll();
+    res.status(200).json(products);   
   });
-  router.get("/:id", async (req, res) => {
+/*   router.get("/:id", async (req, res) => {
     const id = req.params.id
     const query = "SELECT * FROM products WHERE id = $1";
     const product = (await client.query(query,[id]))
     res.status(200).json(product.rows[0])
-  });
-  router.post("/", async (req, res) => {
+  }); */
+/*   router.post("/", async (req, res) => {
     console.log(req.body)
     const { name, description, price, category_id } = req.body
     const query = "INSERT INTO Products(name, description, price, category_id) values($1, $2, $3, $4)"
     const product = (await client.query(query, [name, description, price, category_id]))
     console.log(product)
     res.status(201).json(product.rows[0])
-  });
+  }); */
 
   return router;  
 };
