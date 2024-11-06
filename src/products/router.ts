@@ -8,12 +8,11 @@ export const createRouter = (service: ProductService) => {
     const products = await service.getAll();
     res.status(200).json(products);   
   });
-/*   router.get("/:id", async (req, res) => {
-    const id = req.params.id
-    const query = "SELECT * FROM products WHERE id = $1";
-    const product = (await client.query(query,[id]))
-    res.status(200).json(product.rows[0])
-  }); */
+
+  router.get('/:id', async (req, res) => {
+    const product = await service.getById(req.params.id)
+    res.status(200).json(product);
+  });
 /*   router.post("/", async (req, res) => {
     console.log(req.body)
     const { name, description, price, category_id } = req.body
