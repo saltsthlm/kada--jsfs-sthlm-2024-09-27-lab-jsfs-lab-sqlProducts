@@ -3,11 +3,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const requiredVars = [
-  "PGHOST",
-  "PGUSER",
-  "PGPASSWORD",
-  "PGDATABASE",
-  "PGPORT"
+  "PG_HOST",
+  "PG_USER",
+  "PG_PASSWORD",
+  "PG_DATABASE",
+  "PG_PORT"
 ];
 
 requiredVars.forEach((key) => {
@@ -18,9 +18,9 @@ requiredVars.forEach((key) => {
 });
 
 export const config = {
-  host: process.env.PGHOST as string,
-  port: Number(process.env.PGPORT),
-  user: process.env.PGUSER as string,
-  password: process.env.PGPASSWORD as string,
-  database: process.env.PGDATABASE as string,
+  host: process.env.PG_HOST as string,
+  port: Number(process.env.PG_PORT),
+  user: process.env.PG_USER as string,
+  password: process.env.PG_PASSWORD as string,
+  database: process.env.PG_DATABASE as string,
 };
